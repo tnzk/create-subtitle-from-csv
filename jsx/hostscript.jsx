@@ -1,6 +1,6 @@
 function createSubtitle(str, inPointFrame, outPointFrame) {
     app.beginUndoGroup('createSubtitle');
-    var subtitle = subtitleComp.layers.addText(str);
+    var subtitle = activeComp.layers.addText(str);
     subtitle.inPoint = inPointFrame;
     subtitle.outPoint = outPointFrame;
     app.endUndoGroup();
@@ -8,6 +8,5 @@ function createSubtitle(str, inPointFrame, outPointFrame) {
 }
 
 function init() {
-    // app.project.items.addComp(name, height, pixelAspect, duration, frameRate)
-    subtitleComp = app.project.items.addComp("subtitle", 1920, 1080, 1, 1200, 30);
+    activeComp = app.project.activeItem;
 }
