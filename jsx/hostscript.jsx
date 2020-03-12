@@ -9,5 +9,5 @@ function createSubtitle(str, inPointFrame, outPointFrame) {
 
 function init() {
     // app.project.items.addComp(name, height, pixelAspect, duration, frameRate)
-    subtitleComp = app.project.items.addComp("subtitle", 1920, 1080, 1, 1200, 60);
+    subtitleComp = app.project.items.addComp("subtitle", 1920, 1080, 1, 1200, 30);
 }
