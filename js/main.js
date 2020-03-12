@@ -14,8 +14,8 @@ async function createSubtitles(event) {
     console.log(subtitles)
     var res = await Promise.all(subtitles.map((subtitle) => {
         var str = subtitle[0];
-        var inPointFrame = subtitle[1];
-        var endPointFrame = subtitle[2];
+        var inPointFrame = parseTimeToSeconds(subtitle[1]);
+        var endPointFrame = parseTimeToSeconds(subtitle[2]);
         console.log(`createSubtitle("${str}", ${inPointFrame}, ${endPointFrame})`);
         return csEvalScript(`createSubtitle("${str}", ${inPointFrame}, ${endPointFrame})`);
     }));
@@ -52,6 +52,20 @@ function csEvalScript(str) {
             reject(err);
         }
     });
+}
+
+function parseTimeToSeconds(str) {
+    var frameRate = 30;
+    var regex = new RegExp(/[0-9]+/g);
+    var nums = str.match(regex);
+    if (nums.length != 4) return 0; 
+    var total = 0;
+    total += parseInt(nums[0]) * 60 * 60; // h
+    total += parseInt(nums[1]) * 60; // m
+    total += parseInt(nums[2]); // s
+    total += parseInt(nums[3]) / frameRate; // f
+    console.log(total)
+    return total;
 }
 
 init();
